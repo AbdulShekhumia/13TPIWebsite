@@ -29,6 +29,21 @@ namespace _13TPIWebsite.Controllers
         {
             return View();
         }
+        [AllowAnonymous]
+        public IActionResult ContactSubmitted()
+        {
+            return View();
+        }
+        [AllowAnonymous]
+        public IActionResult Donate()
+        {
+            return View();
+        }
+        [AllowAnonymous]
+        public IActionResult DonationSuccessful()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
