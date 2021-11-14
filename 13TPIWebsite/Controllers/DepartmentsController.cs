@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace _13TPIWebsite.Controllers
 {
+    [Authorize]
     public class DepartmentsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -21,7 +22,6 @@ namespace _13TPIWebsite.Controllers
         }
 
         // GET: Departments
-        [Authorize]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Department.ToListAsync());
