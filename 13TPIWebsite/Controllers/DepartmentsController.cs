@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GlobalDatabase.Models;
 using _13TPIWebsite.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace _13TPIWebsite.Controllers
 {
@@ -20,6 +21,7 @@ namespace _13TPIWebsite.Controllers
         }
 
         // GET: Departments
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Department.ToListAsync());
