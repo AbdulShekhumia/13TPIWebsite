@@ -11,8 +11,10 @@ namespace GlobalDatabase.Models
        
         public int JobID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Job Title is Required")]
+        [Display(Name = "Job Title")]
         public string JobTitle { get; set; }
+        [Required(ErrorMessage = "Salary Range is Required")]
         [Display(Name ="Salary Range (Per Hour)")]
         public string SalaryRange { get; set; }
         public ICollection<Staff> Staff { get; set; }
