@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<GlobalDatabase.Models.Pollution>
+@using Microsoft.AspNetCore.Identity
+@using _13TPIWebsite.Areas.Identity.Data
+@inject SignInManager<ApplicationUser> SignInManager
 
 @{
     ViewData["Title"] = "Index";
@@ -6,9 +9,13 @@
 
 <h1>Pollution Levels</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@if (SignInManager.IsSignedIn(User))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+
 <form asp-controller="Pollutions" asp-action="Index">
     <p>
         Pollution Levels <input type="text" name="searchTerm">
@@ -37,7 +44,8 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Country)
@@ -54,12 +62,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CarbonEmissions)
             </td>
+            @if (SignInManager.IsSignedIn(User))
+            {
             <td>
                 <a asp-action="Edit" asp-route-id="@item.PollutionID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.PollutionID">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.PollutionID">Delete</a>
             </td>
+            }
         </tr>
-}
+        }
     </tbody>
 </table>
