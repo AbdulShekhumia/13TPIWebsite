@@ -35,6 +35,11 @@ namespace _13TPIWebsite.Controllers
             return View();
         }
         [AllowAnonymous]
+        public IActionResult About()
+        {
+            return View();
+        }
+        [AllowAnonymous]
         public IActionResult Donate()
         {
             return View();
