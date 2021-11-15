@@ -22,9 +22,19 @@ namespace _13TPIWebsite.Controllers
         }
 
         // GET: Workspaces
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchTerm)
         {
-            return View(await _context.Workspaces.ToListAsync());
+            var workspaces = from s in _context.Workspaces
+                              select s;
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                {
+                    workspaces = workspaces.Where(s => s.WorkspacesName.Contains(searchTerm));
+                }
+
+            }
+            return View(await workspaces.ToListAsync());
+
         }
 
         // GET: Workspaces/Details/5

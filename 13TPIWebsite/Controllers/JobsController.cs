@@ -22,9 +22,18 @@ namespace _13TPIWebsite.Controllers
         }
 
         // GET: Jobs
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchTerm)
         {
-            return View(await _context.Job.ToListAsync());
+            var jobs = from s in _context.Job
+                              select s;
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                {
+                    jobs = jobs.Where(s => s.JobTitle.Contains(searchTerm) && s.SalaryRange.Contains(""));
+                }
+            }
+            return View(await jobs.ToListAsync());
+
         }
 
         // GET: Jobs/Details/5

@@ -20,11 +20,20 @@ namespace _13TPIWebsite.Controllers
         }
 
         // GET: Pollutions
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchTerm)
         {
-            return View(await _context.Pollution.ToListAsync());
-        }
+            var pollutions = from s in _context.Pollution
+                              select s;
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                {
+                    pollutions = pollutions.Where(s => s.Country.Contains(searchTerm));
+                }
 
+            }
+            return View(await pollutions.ToListAsync());
+
+        }
         // GET: Pollutions/Details/5
         public async Task<IActionResult> Details(int? id)
         {

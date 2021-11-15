@@ -1,14 +1,20 @@
 ﻿@model IEnumerable<GlobalDatabase.Models.Job>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Jobs";
 }
 
-<h1>Index</h1>
+<h1>Jobs</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<form asp-controller="Jobs" asp-action="Index">
+    <p>
+        Job <input type="text" name="searchTerm">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </p>
+</form>
 <table class="table">
     <thead>
         <tr>

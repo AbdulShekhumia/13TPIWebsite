@@ -22,9 +22,19 @@ namespace _13TPIWebsite.Controllers
         }
 
         // GET: Staffs
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchTerm)
         {
-            return View(await _context.Staff.ToListAsync());
+            var staffs = from s in _context.Staff
+                              select s;
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                {
+                    staffs = staffs.Where(s => s.FirstName.Contains(searchTerm));
+                }
+
+            }
+            return View(await staffs.ToListAsync());
+
         }
 
         // GET: Staffs/Details/5

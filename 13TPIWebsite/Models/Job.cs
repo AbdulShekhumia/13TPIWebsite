@@ -13,7 +13,7 @@ namespace GlobalDatabase.Models
 
         [Required]
         public string JobTitle { get; set; }
-        [Display(Name ="Salary Range")]
+        [Display(Name ="Salary Range (Per Hour)")]
         public string SalaryRange { get; set; }
         public ICollection<Staff> Staff { get; set; }
     }

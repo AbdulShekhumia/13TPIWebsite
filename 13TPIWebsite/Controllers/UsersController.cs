@@ -22,9 +22,19 @@ namespace _13TPIWebsite.Controllers
         }
 
         // GET: Users
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchTerm)
         {
-            return View(await _context.User.ToListAsync());
+            var users = from s in _context.User
+                              select s;
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                {
+                    users = users.Where(s => s.FirstName.Contains(searchTerm));
+                }
+
+            }
+            return View(await users.ToListAsync());
+
         }
 
         // GET: Users/Details/5
