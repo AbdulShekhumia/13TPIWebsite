@@ -22,11 +22,20 @@ namespace _13TPIWebsite.Controllers
         }
 
         // GET: Departments
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchTerm)
         {
-            return View(await _context.Department.ToListAsync());
-        }
+            var departments = from s in _context.Department
+                              select s;
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                {
+                    departments = departments.Where(s => s.DepartmentName.Contains(searchTerm));
+                }
+                
+            }
+            return View(await departments.ToListAsync());
 
+        }
         // GET: Departments/Details/5
         public async Task<IActionResult> Details(int? id)
         {
