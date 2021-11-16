@@ -29,7 +29,7 @@ namespace _13TPIWebsite.Controllers
             if (!string.IsNullOrEmpty(searchTerm))
             {
                 {
-                    staffs = staffs.Where(s => s.FirstName.Contains(searchTerm));
+                    staffs = staffs.Where(s => s.FirstName.Contains(searchTerm)  || s.LastName.Contains(searchTerm));
                 }
 
             }
