@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace _13TPIWebsite.Controllers
 {
-    [Authorize]
+    
     public class WorkspacesController : Controller
     {
         private readonly ApplicationDbContext _context;

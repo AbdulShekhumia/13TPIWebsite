@@ -1,17 +1,22 @@
 ﻿@model IEnumerable<GlobalDatabase.Models.Workspaces>
-
+@using Microsoft.AspNetCore.Identity
+@using _13TPIWebsite.Areas.Identity.Data
+@inject SignInManager<ApplicationUser> SignInManager
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Workspaces</h1>
+<h1>Locations</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<form asp-controller="Workspaces" asp-action="Index">
+@if (SignInManager.IsSignedIn(User))
+{
     <p>
-        Workspace <input type="text" name="searchTerm">
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+<form asp-controller="Locations" asp-action="Index">
+    <p>
+        Location <input type="text" name="searchTerm">
         <button type="submit" class="btn btn-primary">Search</button>
     </p>
 </form>
@@ -43,7 +48,8 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.WorkspacesName)
@@ -66,12 +72,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ZipCode)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.WorkspacesID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.WorkspacesID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.WorkspacesID">Delete</a>
-            </td>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.WorkspacesID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.WorkspacesID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.WorkspacesID">Delete</a>
+                </td>
+            }
         </tr>
-}
+        }
     </tbody>
 </table>
