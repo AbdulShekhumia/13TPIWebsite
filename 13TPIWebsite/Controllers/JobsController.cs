@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using GlobalDatabase.Models;
 using _13TPIWebsite.Data;
 using Microsoft.AspNetCore.Authorization;
+using X.PagedList;
 
 namespace _13TPIWebsite.Controllers
 {
@@ -22,17 +23,42 @@ namespace _13TPIWebsite.Controllers
         }
 
         // GET: Jobs
-        public async Task<IActionResult> Index(string searchTerm)
+        public ActionResult Index(string searchTerm, string sortOrder, string currentFilter, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.JobTitleSortParm = String.IsNullOrEmpty(sortOrder) ? "jobtitle_desc" : "";
+            
+            if (searchTerm != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchTerm = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchTerm;
+
             var jobs = from s in _context.Job
                               select s;
             if (!string.IsNullOrEmpty(searchTerm))
             {
                 {
-                    jobs = jobs.Where(s => s.JobTitle.Contains(searchTerm) && s.SalaryRange.Contains(""));
+                    jobs = jobs.Where(s => s.JobTitle.Contains(searchTerm));
                 }
             }
-            return View(await jobs.ToListAsync());
+            switch (sortOrder)
+            {
+                case "jobtitle_desc":
+                    jobs = jobs.OrderByDescending(s => s.JobTitle);
+                    break;
+                default:
+                    jobs = jobs.OrderBy(s => s.JobTitle);
+                    break;
+            }
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(jobs.ToPagedList(pageNumber, pageSize));
 
         }
 

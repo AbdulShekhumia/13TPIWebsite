@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GlobalDatabase.Models;
 using _13TPIWebsite.Data;
+using X.PagedList;
 
 namespace _13TPIWebsite.Controllers
 {
@@ -20,8 +21,22 @@ namespace _13TPIWebsite.Controllers
         }
 
         // GET: Pollutions
-        public async Task<IActionResult> Index(string searchTerm)
+        public ActionResult Index(string searchTerm, string sortOrder, string currentFilter, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.CountrySortParm = String.IsNullOrEmpty(sortOrder) ? "country_desc" : "";
+            
+            if (searchTerm != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchTerm = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchTerm;
+
             var pollutions = from s in _context.Pollution
                               select s;
             if (!string.IsNullOrEmpty(searchTerm))
@@ -31,7 +46,19 @@ namespace _13TPIWebsite.Controllers
                 }
 
             }
-            return View(await pollutions.ToListAsync());
+            switch (sortOrder)
+            {
+                case "country_desc":
+                    pollutions = pollutions.OrderByDescending(s => s.Country);
+                    break;
+                default:
+                    pollutions = pollutions.OrderBy(s => s.Country);
+                    break;
+            }
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(pollutions.ToPagedList(pageNumber, pageSize));
 
         }
         // GET: Pollutions/Details/5

@@ -1,4 +1,6 @@
-﻿@model IEnumerable<GlobalDatabase.Models.Pollution>
+﻿@model X.PagedList.IPagedList<GlobalDatabase.Models.Pollution>
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
 @using Microsoft.AspNetCore.Identity
 @using _13TPIWebsite.Areas.Identity.Data
 @inject SignInManager<ApplicationUser> SignInManager
@@ -18,7 +20,7 @@
 
 <form asp-controller="Pollutions" asp-action="Index">
     <p>
-        Pollution Levels <input type="text" name="searchTerm">
+        Country <input type="text" name="searchTerm">
         <button type="submit" class="btn btn-primary">Search</button>
     </p>
 </form>
@@ -26,19 +28,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Country)
+                @Html.ActionLink("Country", "Index", new { sortOrder = ViewBag.CountrySortParm, currentFilter = ViewBag.CurrentFilter })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AvgTemperature)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().AvgTemperature)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Population)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Population)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PollutionLevels)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().PollutionLevels)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CarbonEmissions)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().CarbonEmissions)
             </th>
             <th></th>
         </tr>
@@ -46,31 +48,36 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Country)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AvgTemperature)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Population)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PollutionLevels)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CarbonEmissions)
-            </td>
-            @if (SignInManager.IsSignedIn(User))
-            {
+            <tr>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.PollutionID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.PollutionID">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.PollutionID">Delete</a>
+                    @Html.DisplayFor(modelItem => item.Country)
                 </td>
-            }
-        </tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AvgTemperature)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Population)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PollutionLevels)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CarbonEmissions)
+                </td>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.PollutionID">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.PollutionID">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.PollutionID">Delete</a>
+                    </td>
+                }
+            </tr>
         }
     </tbody>
 </table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

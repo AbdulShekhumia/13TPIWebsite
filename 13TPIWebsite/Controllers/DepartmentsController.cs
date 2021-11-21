@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using GlobalDatabase.Models;
 using _13TPIWebsite.Data;
 using Microsoft.AspNetCore.Authorization;
+using X.PagedList;
 
 namespace _13TPIWebsite.Controllers
 {
@@ -22,8 +23,22 @@ namespace _13TPIWebsite.Controllers
         }
 
         // GET: Departments
-        public async Task<IActionResult> Index(string searchTerm)
+        public ActionResult Index(string searchTerm, string sortOrder, string currentFilter, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.DepartmentNameSortParm = String.IsNullOrEmpty(sortOrder) ? "department_desc" : "";
+
+            if (searchTerm != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchTerm = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchTerm;
+
             var departments = from s in _context.Department
                               select s;
             if (!string.IsNullOrEmpty(searchTerm))
@@ -33,7 +48,18 @@ namespace _13TPIWebsite.Controllers
                 }
                 
             }
-            return View(await departments.ToListAsync());
+            switch (sortOrder)
+            {
+                case "department_desc":
+                    departments = departments.OrderByDescending(s => s.DepartmentName);
+                    break;
+                default:
+                    departments = departments.OrderBy(s => s.DepartmentName);
+                    break;
+            }
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(departments.ToPagedList(pageNumber, pageSize));
 
         }
         // GET: Departments/Details/5

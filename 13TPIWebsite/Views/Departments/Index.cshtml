@@ -1,4 +1,6 @@
-﻿@model IEnumerable<GlobalDatabase.Models.Department>
+﻿@model X.PagedList.IPagedList<GlobalDatabase.Models.Department>
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
 
 @{
     ViewData["Title"] = "Departments";
@@ -11,7 +13,7 @@
 </p>
 <form asp-controller="Departments" asp-action="Index">
     <p>
-        Department <input type="text" name="searchTerm">
+        Department Name <input type="text" name="searchTerm">
         <button type="submit" class="btn btn-primary">Search</button>
     </p>
 </form>
@@ -19,23 +21,29 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.DepartmentName)
+                @Html.ActionLink("Department Name", "Index", new { sortOrder = ViewBag.DepartmentNameSortParm, currentFilter = ViewBag.CurrentFilter })
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DepartmentName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.DepartmentID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.DepartmentID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.DepartmentID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepartmentName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.DepartmentID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.DepartmentID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.DepartmentID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

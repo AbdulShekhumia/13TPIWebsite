@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using GlobalDatabase.Models;
 using _13TPIWebsite.Data;
 using Microsoft.AspNetCore.Authorization;
+using X.PagedList;
 
 namespace _13TPIWebsite.Controllers
 {
@@ -22,18 +23,58 @@ namespace _13TPIWebsite.Controllers
         }
 
         // GET: Workspaces
-        public async Task<IActionResult> Index(string searchTerm)
+        public ActionResult Index(string searchTerm, string sortOrder, string currentFilter, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.WorkspacesNameSortParm = String.IsNullOrEmpty(sortOrder) ? "workspacesname_desc" : "";
+            ViewBag.CitySortParm = sortOrder == "City" ? "city_desc" : "City";
+            ViewBag.SuburbSortParm = sortOrder == "Suburb" ? "suburb_desc" : "Suburb";
+
+            if (searchTerm != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchTerm = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchTerm;
+
             var workspaces = from s in _context.Workspaces
                               select s;
             if (!string.IsNullOrEmpty(searchTerm))
             {
                 {
-                    workspaces = workspaces.Where(s => s.WorkspacesName.Contains(searchTerm));
+                    workspaces = workspaces.Where(s => s.WorkspacesName.Contains(searchTerm) || s.City.Contains(searchTerm) || s.Suburb.Contains(searchTerm));
                 }
 
             }
-            return View(await workspaces.ToListAsync());
+            switch (sortOrder)
+            {
+                case "workspacesname_desc":
+                    workspaces = workspaces.OrderByDescending(s => s.WorkspacesName);
+                    break;
+                case "City":
+                    workspaces = workspaces.OrderBy(s => s.City);
+                    break;
+                case "city_desc":
+                    workspaces = workspaces.OrderByDescending(s => s.City);
+                    break;
+                case "Suburb":
+                    workspaces = workspaces.OrderBy(s => s.Suburb);
+                    break;
+                case "suburb_desc":
+                    workspaces = workspaces.OrderByDescending(s => s.Suburb);
+                    break;
+                default:
+                    workspaces = workspaces.OrderBy(s => s.WorkspacesName);
+                    break;
+            }
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(workspaces.ToPagedList(pageNumber, pageSize));
 
         }
 
