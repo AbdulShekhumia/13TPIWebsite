@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using GlobalDatabase.Models;
 using _13TPIWebsite.Data;
 using Microsoft.AspNetCore.Authorization;
+using X.PagedList;
 
 namespace _13TPIWebsite.Controllers
 {
@@ -22,19 +23,51 @@ namespace _13TPIWebsite.Controllers
         }
 
         // GET: Staffs
-        public async Task<IActionResult> Index(string searchTerm)
+        public ActionResult Index(string searchTerm, string sortOrder, string currentFilter, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.FirstNameSortParm = String.IsNullOrEmpty(sortOrder) ? "firstname_desc" : "";
+            ViewBag.LastNameSortParm = sortOrder == "Last Name" ? "lastname_desc" : "Last Name";
+
+            if (searchTerm != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchTerm = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchTerm;
+
             var staffs = from s in _context.Staff
-                              select s;
+                         select s;
             if (!string.IsNullOrEmpty(searchTerm))
             {
                 {
-                    staffs = staffs.Where(s => s.FirstName.Contains(searchTerm)  || s.LastName.Contains(searchTerm));
+                    staffs = staffs.Where(s => s.FirstName.Contains(searchTerm) || s.LastName.Contains(searchTerm));
                 }
 
             }
-            return View(await staffs.ToListAsync());
+            switch (sortOrder)
+            {
+                case "firstname_desc":
+                    staffs = staffs.OrderByDescending(s => s.FirstName);
+                    break;
+                case "Last Name":
+                    staffs = staffs.OrderBy(s => s.LastName);
+                    break;
+                case "lastname_desc":
+                    staffs = staffs.OrderByDescending(s => s.LastName);
+                    break;
+                default:
+                    staffs = staffs.OrderBy(s => s.FirstName);
+                    break;
+            }
 
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(staffs.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Staffs/Details/5
