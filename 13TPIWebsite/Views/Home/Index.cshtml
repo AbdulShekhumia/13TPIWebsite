@@ -1,4 +1,5 @@
-﻿@{ ViewData["Title"] = "Home Page"; }
+﻿@model ContactMail
+@{ ViewData["Title"] = "Home Page"; }
 
 <title>Global Climate Vision</title>
 <meta charset="UTF-8">
@@ -117,16 +118,25 @@
                     <i class="fa fa-envelope" style="width:30px"> </i> Email: info@example.org.nz<br>
                 </div>
                 <div class="w3-col m6">
-                    <form action="/Home/ContactSubmitted">
+                    <h1>@ViewBag.Message</h1>
+                    <form method="post">
                         <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
                             <div class="w3-half">
-                                <input class="w3-input w3-border" type="text" placeholder="Name" required name="Name">
+                                <label asp-for="@Model.Name"></label>
+                                <input class="w3-input w3-border" type="text" asp-for="@Model.Name" placeholder="Name">
+                                <span class="text-danger" asp-validation-for="@Model.Name"></span>
                             </div>
                             <div class="w3-half">
-                                <input class="w3-input w3-border" type="text" placeholder="Email" required name="Email">
+                                <label asp-for="@Model.Email"></label>
+                                <input class="w3-input w3-border" type="text" asp-for="@Model.Email" placeholder="Email">
+                                <span class="text-danger" asp-validation-for="@Model.Email"></span>
                             </div>
                         </div>
-                        <input class="w3-input w3-border" type="text" placeholder="Message" required name="Message">
+                        <div>
+                            <label asp-for="@Model.Message"></label>
+                            <input class="w3-input w3-border" type="text" asp-for="@Model.Message" placeholder="Message">
+                            <span class="text-danger" asp-validation-for="@Model.Message"></span>
+                        </div>
                         <button class="w3-button w3-black w3-section w3-right" type="submit">SEND</button>
                     </form>
                 </div>
