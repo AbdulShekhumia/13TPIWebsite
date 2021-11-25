@@ -1,4 +1,5 @@
-﻿@{
+﻿@model ServicesMail
+@{
     ViewData["Title"] = "Request Services";
 }
 <h1>@ViewData["Title"]</h1>
@@ -37,35 +38,39 @@
             input[type=submit]:hover {
                 background-color: #45a049;
             }
-
     </style>
 </head>
 <body>
 
-    <h3>What services do you require?</h3>
+    <h3>What services do you require? (Summary of form will be sent to signed-in user's email)</h3>
 
     <div class="container">
-        <form action="/Home/ServicesSubmitted">
-            <label for="fname">First Name</label>
-            <input type="text" id="fname" name="firstname" placeholder="Your name.." required field="firstname">
-
-            <label for="lname">Last Name</label>
-            <input type="text" id="lname" name="lastname" placeholder="Your last name.." required field="lastname">
-
-            <label for="email">Email</label>
-            <input type="text" id="email" name="email" placeholder="Your email.." required field="email">
-
-            <label for="services">Services</label>
-            <select id="services" name="services" required>
-                <option value=""></option>
-                <option value="waste">Waste Cleanup</option>
-                <option value="solar">Solar Panels Installation</option>
-                <option value="vehicle">Electric Vehicle Services</option>
-            </select>
-
-            <label for="subject">Any additional messages?</label>
-            <textarea id="subject" name="subject" placeholder="Write your message here..." style="height:200px"></textarea>
-
+        <h1>@ViewBag.Message</h1>
+        <form method="post">
+            <div>
+                <label asp-for="@Model.FirstName"></label>
+                <input type="text" asp-for="@Model.FirstName" id="fname" name="firstname" placeholder="Your name.." required field="firstname">
+                <span class="text-danger" asp-validation-for="@Model.FirstName"></span>
+            </div>
+            <div>
+                <label asp-for="@Model.LastName"></label>
+                <input type="text" asp-for="@Model.LastName" id="lname" name="lastname" placeholder="Your last name.." required field="lastname">
+                <span class="text-danger" asp-validation-for="@Model.LastName"></span>
+            </div>
+            <div>
+                <label asp-for="@Model.Services"></label>
+                <select id="services" name="services" asp-for="@Model.Services" required>
+                    <option value=""></option>
+                    <option value="Waste Cleanup">Waste Cleanup</option>
+                    <option value="Solar Panels Installation">Solar Panels Installation</option>
+                    <option value="Electric Vehicle Services">Electric Vehicle Services</option>
+                </select>
+            </div>
+            <div>
+                <label asp-for="@Model.Message"></label>
+                <textarea id="subject" name="message" asp-for="@Model.Message" placeholder="Write your message here..." style="height:200px"></textarea>
+                <span class="text-danger" asp-validation-for="@Model.Message"></span>
+            </div>
             <input type="submit" value="Submit">
         </form>
     </div>
