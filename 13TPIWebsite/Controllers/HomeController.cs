@@ -102,7 +102,7 @@ namespace _13TPIWebsite.Controllers
                 mail.From = new MailAddress("globalclimatevision@gmail.com");
 
                 //To Email Address - your need to enter your to email address
-                mail.To.Add("globalclimatevision@gmail.com");
+                mail.To.Add(contactMail.Email);
 
                 mail.Subject = contactMail.Name;
 
