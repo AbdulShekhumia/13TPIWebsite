@@ -2,91 +2,6 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
-}
-
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
-}
-
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-  font-family: "Roboto", sans-serif;
-}
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
-}
-
-/*for tab control*/
-div.login-logout-tab div.card-header {
-    padding: 0px 0px 12px 0px;
-}
-
-div.login-logout-tab ul.nav-tabs {
-    margin: 0px 0px -12px 0px;
-}
-
-div.login-lougout-tab li.nav-item {
-    width: 50%;
-}
-
-div.login-logout-tab a.nav-link {
-    font-size: 25px;
-    color: #495057;
-    text-align: center;
-}
-
-
-
-a.navbar-brand {
     white-space: normal;
     text-align: center;
     word-break: break-all;
@@ -98,12 +13,6 @@ a {
 }
 
 .btn-primary {
-    color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
-}
-
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     color: #fff;
     background-color: #1b6ec2;
     border-color: #1861ac;
@@ -159,257 +68,44 @@ body {
     line-height: 60px; /* Vertically center the text there */
 }
 
-body {
-    font-family: "Lato", sans-serif
+/*for tab control*/
+div.login-logout-tab div.card-header {
+    padding: 0px 0px 12px 0px;
 }
 
-.mySlides {
-    display: none
+div.login-logout-tab ul.nav-tabs {
+    margin: 0px 0px -12px 0px;
 }
 
-html {
-    box-sizing: border-box
+div.login-lougout-tab li.nav-item {
+    width: 50%;
 }
 
-*, *:before, *:after {
-    box-sizing: inherit
+div.login-logout-tab a.nav-link {
+    font-size: 25px;
+    color: #495057;
+    text-align: center;
 }
 
-html {
-    -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%
-}
 
-body {
-    margin: 0
-}
 
-article, aside, details, figcaption, figure, footer, header, main, menu, nav, section {
-    display: block
-}
 
-summary {
-    display: list-item
-}
-
-audio, canvas, progress, video {
-    display: inline-block
-}
-
-progress {
-    vertical-align: baseline
-}
-
-audio:not([controls]) {
-    display: none;
-    height: 0
-}
-
-[hidden], template {
-    display: none
-}
-
-a {
-    background-color: transparent
-}
-
-    a:active, a:hover {
-        outline-width: 0
-    }
-
-abbr[title] {
-    border-bottom: none;
-    text-decoration: underline;
-    text-decoration: underline dotted
-}
-
-b, strong {
-    font-weight: bolder
-}
-
-dfn {
-    font-style: italic
-}
-
-mark {
-    background: #ff0;
-    color: #000
-}
-
-small {
-    font-size: 80%
-}
-
-sub, sup {
-    font-size: 75%;
-    line-height: 0;
-    position: relative;
-    vertical-align: baseline
-}
-
-sub {
-    bottom: -0.25em
-}
-
-sup {
-    top: -0.5em
-}
-
-figure {
-    margin: 1em 40px
-}
-
-img {
-    border-style: none
-}
-
-code, kbd, pre, samp {
-    font-family: monospace,monospace;
-    font-size: 1em
-}
-
-hr {
-    box-sizing: content-box;
-    height: 0;
-    overflow: visible
-}
-
-button, input, select, textarea, optgroup {
-    font: inherit;
-    margin: 0
-}
-
-optgroup {
-    font-weight: bold
-}
-
-button, input {
-    overflow: visible
-}
-
-button, select {
-    text-transform: none
-}
-
-button, [type=button], [type=reset], [type=submit] {
-    -webkit-appearance: button
-}
-
-    button::-moz-focus-inner, [type=button]::-moz-focus-inner, [type=reset]::-moz-focus-inner, [type=submit]::-moz-focus-inner {
-        border-style: none;
-        padding: 0
-    }
-
-    button:-moz-focusring, [type=button]:-moz-focusring, [type=reset]:-moz-focusring, [type=submit]:-moz-focusring {
-        outline: 1px dotted ButtonText
-    }
-
-fieldset {
-    border: 1px solid #c0c0c0;
-    margin: 0 2px;
-    padding: .35em .625em .75em
-}
-
-legend {
-    color: inherit;
-    display: table;
-    max-width: 100%;
-    padding: 0;
-    white-space: normal
-}
-
-textarea {
-    overflow: auto
-}
-
-[type=checkbox], [type=radio] {
-    padding: 0
-}
-
-[type=number]::-webkit-inner-spin-button, [type=number]::-webkit-outer-spin-button {
-    height: auto
-}
-
-[type=search] {
-    -webkit-appearance: textfield;
-    outline-offset: -2px
-}
-
-    [type=search]::-webkit-search-decoration {
-        -webkit-appearance: none
-    }
-
-::-webkit-file-upload-button {
-    -webkit-appearance: button;
-    font: inherit
-}
-
-html, body {
-    font-family: Verdana,sans-serif;
-    font-size: 15px;
-    line-height: 1.5
-}
-
-html {
-    overflow-x: hidden
-}
-
-h1 {
-    font-size: 36px
-}
-
-h2 {
-    font-size: 30px
-}
-
-h3 {
-    font-size: 24px
-}
-
-h4 {
-    font-size: 20px
-}
-
-h5 {
-    font-size: 18px
-}
-
-h6 {
-    font-size: 16px
-}
 
 .w3-serif {
     font-family: serif
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: "Segoe UI",Arial,sans-serif;
-    font-weight: 400;
-    margin: 10px 0
-}
 
 .w3-wide {
     letter-spacing: 4px
 }
 
-hr {
-    border: 0;
-    border-top: 1px solid #eee;
-    margin: 20px 0
-}
 
 .w3-image {
     max-width: 100%;
     height: auto
 }
 
-img {
-    vertical-align: middle
-}
-
-a {
-    color: inherit
-}
 
 .w3-table, .w3-table-all {
     border-collapse: collapse;
@@ -1894,234 +1590,9 @@ a {
     border-color: #e7ffff !important
 }
 
-body {
-    font-family: "Lato", sans-serif
-}
 
-.mySlides {
-    display: none
-}
 
-html {
-    box-sizing: border-box
-}
 
-*, *:before, *:after {
-    box-sizing: inherit
-}
-
-html {
-    -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%
-}
-
-body {
-    margin: 0
-}
-
-article, aside, details, figcaption, figure, footer, header, main, menu, nav, section {
-    display: block
-}
-
-summary {
-    display: list-item
-}
-
-audio, canvas, progress, video {
-    display: inline-block
-}
-
-progress {
-    vertical-align: baseline
-}
-
-audio:not([controls]) {
-    display: none;
-    height: 0
-}
-
-[hidden], template {
-    display: none
-}
-
-a {
-    background-color: transparent
-}
-
-    a:active, a:hover {
-        outline-width: 0
-    }
-
-abbr[title] {
-    border-bottom: none;
-    text-decoration: underline;
-    text-decoration: underline dotted
-}
-
-b, strong {
-    font-weight: bolder
-}
-
-dfn {
-    font-style: italic
-}
-
-mark {
-    background: #ff0;
-    color: #000
-}
-
-small {
-    font-size: 80%
-}
-
-sub, sup {
-    font-size: 75%;
-    line-height: 0;
-    position: relative;
-    vertical-align: baseline
-}
-
-sub {
-    bottom: -0.25em
-}
-
-sup {
-    top: -0.5em
-}
-
-figure {
-    margin: 1em 40px
-}
-
-img {
-    border-style: none
-}
-
-code, kbd, pre, samp {
-    font-family: monospace,monospace;
-    font-size: 1em
-}
-
-hr {
-    box-sizing: content-box;
-    height: 0;
-    overflow: visible
-}
-
-button, input, select, textarea, optgroup {
-    font: inherit;
-    margin: 0
-}
-
-optgroup {
-    font-weight: bold
-}
-
-button, input {
-    overflow: visible
-}
-
-button, select {
-    text-transform: none
-}
-
-button, [type=button], [type=reset], [type=submit] {
-    -webkit-appearance: button
-}
-
-    button::-moz-focus-inner, [type=button]::-moz-focus-inner, [type=reset]::-moz-focus-inner, [type=submit]::-moz-focus-inner {
-        border-style: none;
-        padding: 0
-    }
-
-    button:-moz-focusring, [type=button]:-moz-focusring, [type=reset]:-moz-focusring, [type=submit]:-moz-focusring {
-        outline: 1px dotted ButtonText
-    }
-
-fieldset {
-    border: 1px solid #c0c0c0;
-    margin: 0 2px;
-    padding: .35em .625em .75em
-}
-
-legend {
-    color: inherit;
-    display: table;
-    max-width: 100%;
-    padding: 0;
-    white-space: normal
-}
-
-textarea {
-    overflow: auto
-}
-
-[type=checkbox], [type=radio] {
-    padding: 0
-}
-
-[type=number]::-webkit-inner-spin-button, [type=number]::-webkit-outer-spin-button {
-    height: auto
-}
-
-[type=search] {
-    -webkit-appearance: textfield;
-    outline-offset: -2px
-}
-
-    [type=search]::-webkit-search-decoration {
-        -webkit-appearance: none
-    }
-
-::-webkit-file-upload-button {
-    -webkit-appearance: button;
-    font: inherit
-}
-
-html, body {
-    font-family: Verdana,sans-serif;
-    font-size: 15px;
-    line-height: 1.5
-}
-
-html {
-    overflow-x: hidden
-}
-
-h1 {
-    font-size: 36px
-}
-
-h2 {
-    font-size: 30px
-}
-
-h3 {
-    font-size: 24px
-}
-
-h4 {
-    font-size: 20px
-}
-
-h5 {
-    font-size: 18px
-}
-
-h6 {
-    font-size: 16px
-}
-
-.w3-serif {
-    font-family: serif
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: "Segoe UI",Arial,sans-serif;
-    font-weight: 400;
-    margin: 10px 0
-}
 
 .w3-wide {
     letter-spacing: 4px
@@ -2138,13 +1609,6 @@ hr {
     height: auto
 }
 
-img {
-    vertical-align: middle
-}
-
-a {
-    color: inherit
-}
 
 .w3-table, .w3-table-all {
     border-collapse: collapse;
