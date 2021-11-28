@@ -46,7 +46,7 @@
         </tr>
     </thead>
     <tbody>
-        
+
         @if (Model.Count() == 0)
         {
             <tr class="alert-danger">
@@ -89,3 +89,16 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
 
 @Html.PagedListPager(Model, page => Url.Action("Index",
     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<h6> The data of this table has been acquired from:</h6>
+<p><a href="https://www.worldometers.info/co2-emissions/co2-emissions-by-country/">https://www.worldometers.info/co2-emissions/co2-emissions-by-country/</a></p>
+<p><a href="https://www.numbeo.com/pollution/rankings_by_country.jsp">https://www.numbeo.com/pollution/rankings_by_country.jsp</a></p>
+<p><a href="https://listfist.com/list-of-countries-by-average-temperature">https://listfist.com/list-of-countries-by-average-temperature</a></p>
